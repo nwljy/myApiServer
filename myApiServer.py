@@ -200,9 +200,9 @@ def createIdCard():
                     print(data)
                     return make_response(jsonify({'code':1,'message': 'user create yet'}) , 500)
                 else :
-                    
+                    UserId=userData.get('UserId',"1")
                     PIC_Util_=PIC_Util()
-                    PIC_Util_.createIdCard(UserName,UserEmail)
+                    PIC_Util_.createIdCard(UserName,UserEmail,UserId)
                     outResultData=[]
                     outResultData=PyMongoClinetUtil_.insertToDb({'email':UserEmail,'name':UserName,"IsCreate":"1","ImgPath":PIC_Util_.imgPath},userImageDocName)
                     if len(outResultData)>0 and outResultData[0]['code']!=None and outResultData[0]['code']==0:
